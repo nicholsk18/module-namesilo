@@ -13,6 +13,15 @@
 class Namesilo extends RegistrarModule
 {
     /**
+     * @var array Default Namesilo nameservers
+     */
+    private $nameservers = [
+        'ns1.dnsowl.com',
+        'ns2.dnsowl.com',
+        'ns3.dnsowl.com'
+    ];
+
+    /**
      * @var array Namesilo response codes
      */
     private static $codes;
@@ -22,7 +31,14 @@ class Namesilo extends RegistrarModule
      */
     private static $defaultModuleView;
 
+    /**
+     * @var \NamesiloApi An instance of the Namesilo API
+     */
     private $api;
+
+    /**
+     * @var \Blesta\Core\ServiceProviders\Logger An instance of the logger service provider
+     */
     public $logger;
 
     /**
@@ -2665,26 +2681,7 @@ class Namesilo extends RegistrarModule
         }
 
         // Show nameservers alert
-        $required_nameservers = ['ns1.dnsowl.com', 'ns2.dnsowl.com', 'ns3.dnsowl.com'];
-        $current_nameservers = [];
-        $nameservers = $this->getDomainNameServers($fields->domain, $row->id ?? null);
-        foreach ($nameservers as $nameserver) {
-            if (empty($nameserver['url'])) {
-                continue;
-            }
-            $current_nameservers[] = $nameserver['url'];
-        }
-
-        $required_nameservers_count = 0;
-        foreach ($required_nameservers as $nameserver) {
-            if (in_array($nameserver, $current_nameservers)) {
-                $required_nameservers_count++;
-            }
-        }
-
-        if ($required_nameservers_count !== count($current_nameservers) || $required_nameservers_count < 2) {
-            $this->setMessage('notice', Language::_('Namesilo.notice.default_nameservers', true));
-        }
+        $this->validateAndAlertNameservers($fields->domain, $row->id ?? null);
 
         $this->view->set('vars', $vars);
         $this->view->set('domain', $fields->domain);
@@ -3048,26 +3045,7 @@ class Namesilo extends RegistrarModule
         }
 
         // Show nameservers alert
-        $required_nameservers = ['ns1.dnsowl.com', 'ns2.dnsowl.com', 'ns3.dnsowl.com'];
-        $current_nameservers = [];
-        $nameservers = $this->getDomainNameServers($fields->domain, $row->id ?? null);
-        foreach ($nameservers as $nameserver) {
-            if (empty($nameserver['url'])) {
-                continue;
-            }
-            $current_nameservers[] = $nameserver['url'];
-        }
-
-        $required_nameservers_count = 0;
-        foreach ($required_nameservers as $nameserver) {
-            if (in_array($nameserver, $current_nameservers)) {
-                $required_nameservers_count++;
-            }
-        }
-
-        if ($required_nameservers_count !== count($current_nameservers) || $required_nameservers_count < 2) {
-            $this->setMessage('notice', Language::_('Namesilo.notice.default_nameservers', true));
-        }
+        $this->validateAndAlertNameservers($fields->domain, $row->id ?? null);
 
         $vars->selects = Configure::get('Namesilo.dns_records');
         $vars->records = $records['resource_record'];
@@ -3710,6 +3688,27 @@ class Namesilo extends RegistrarModule
         }
 
         return $formatted_phone;
+    }
+
+    /**
+     * Validates nameservers and shows alert if not using default nameservers
+     *
+     * @param string $domain The domain name
+     * @param int|null $module_row_id The module row ID
+     * @return void
+     */
+    private function validateAndAlertNameservers($domain, $module_row_id = null)
+    {
+        $nameservers = $this->getDomainNameServers($domain, $module_row_id);
+        $current_nameservers = array_filter(array_map(function ($nameserver) {
+            return $nameserver['url'] ?? null;
+        }, $nameservers));
+
+        $required_nameservers_count = count(array_intersect($this->nameservers, $current_nameservers));
+
+        if ($required_nameservers_count !== count($current_nameservers) || $required_nameservers_count < 2) {
+            $this->setMessage('notice', Language::_('Namesilo.notice.default_nameservers', true));
+        }
     }
 
     /**
