@@ -185,11 +185,13 @@ $lang['Namesilo.!error.payment_id.valid_format'] = 'Payment ID must be either bl
 $lang['Namesilo.!error.epp.empty'] = 'Domain transfers require an EPP code to be entered.';
 $lang['Namesilo.!error.premium_domain'] = '%1$s is a premium domain. Please contact us for more information.'; // %1$s is the premium domain;
 $lang['Namesilo.!error.invalid_term'] = 'Invalid number of years, or no years provided.';
+$lang['Namesilo.!error.domain_unavailable'] = 'The domain is not available for registration.';
 
 // Notices
 $lang['Namesilo.notice.StatusPending'] = 'This order is pending. The feature you are trying to access will become available once the order has been activated successfully.';
 $lang['Namesilo.notice.StatusSuspended'] = 'This domain name has been suspended; domain management features are therefore currently unavailable. Please contact your service provider for more details or to reinstate service.';
 $lang['Namesilo.notice.TransferPending'] = 'This domain is currently awaiting transfer completion.  Until the transfer is complete domain management features are unavailable.';
+$lang['Namesilo.notice.default_nameservers'] = 'This feature requires that the domain use the following name servers: ns1.dnsowl.com, ns2.dnsowl.com, and ns3.dnsowl.com.';
 
 
 // Domain Transfer Fields
