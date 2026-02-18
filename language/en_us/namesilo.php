@@ -111,6 +111,19 @@ $lang['Namesilo.tab_hosts.field_hostname'] = 'Host';
 $lang['Namesilo.tab_hosts.field_submit'] = 'Update All Hosts';
 $lang['Namesilo.tab_client_hosts.help_text'] = 'On this page you can add your own custom name servers (sometimes referred to as "glue records") to associate with your domains.  To remove a host record blank all IP fields associated with it before clicking update.  You can not delete any host records which have domains actively using it as a nameserver.';
 
+$lang['Namesilo.tab_domain_forwarding.title'] = 'Domain Forwarding';
+$lang['Namesilo.tab_domain_forwarding.desc'] = 'Domain forwarding gets removed automatically when you give the domain something else to do such as changing name servers, or changing the primary A records for @ and www';
+$lang['Namesilo.tab_domain_forwarding.field_domain'] = 'Domain';
+$lang['Namesilo.tab_domain_forwarding.field_forward_to'] = 'Forward To';
+$lang['Namesilo.tab_domain_forwarding.field_http_type'] = 'Forwarding Method';
+$lang['Namesilo.tab_domain_forwarding.permanent_forward'] = 'Permanent Forward (301)';
+$lang['Namesilo.tab_domain_forwarding.temp_forward'] = 'Temporary Forward (302)';
+$lang['Namesilo.tab_domain_forwarding.cloaked'] = 'Cloaked';
+$lang['Namesilo.tab_domain_forwarding.field_active'] = 'Active';
+$lang['Namesilo.tab_domain_forwarding.field_delete'] = 'Delete';
+$lang['Namesilo.tab_domain_forwarding.field_submit'] = 'Update Forwarders';
+$lang['Namesilo.tab_domain_forwarding.invalid_url'] = 'Forwarding URL is invlide. Please make sure to use HTTPS or HTTP.';
+
 $lang['Namesilo.tab_dnssec.title'] = 'DNSSEC';
 $lang['Namesilo.tab_dnssec.title_list'] = 'Current DS (DNSSEC) Records';
 $lang['Namesilo.tab_dnssec.title_add'] = 'Add DS (DNSSEC) Record';

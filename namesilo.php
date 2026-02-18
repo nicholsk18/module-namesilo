@@ -1755,6 +1755,7 @@ class Namesilo extends RegistrarModule
                 'tabEmailForwarding' => Language::_('Namesilo.tab_email_forwarding.title', true),
                 'tabNameservers' => Language::_('Namesilo.tab_nameservers.title', true),
                 'tabHosts' => Language::_('Namesilo.tab_hosts.title', true),
+                'tabDomainForwarding' => Language::_('Namesilo.tab_domain_forwarding.title', true),
                 'tabDnssec' => Language::_('Namesilo.tab_dnssec.title', true),
                 'tabDnsRecords' => Language::_('Namesilo.tab_dnsrecord.title', true),
                 'tabSettings' => Language::_('Namesilo.tab_settings.title', true),
@@ -1815,6 +1816,10 @@ class Namesilo extends RegistrarModule
                 'tabClientHosts' => [
                     'name' => Language::_('Namesilo.tab_hosts.title', true),
                     'icon' => 'fas fa-hdd'
+                ],
+                'tabClientDomainForwarding' => [
+                    'name' => Language::_('Namesilo.tab_domain_forwarding.title', true),
+                    'icon' => 'fas fa-share'
                 ],
                 'tabClientDnssec' => [
                     'name' => Language::_('Namesilo.tab_dnssec.title', true),
@@ -1954,6 +1959,21 @@ class Namesilo extends RegistrarModule
     }
 
     /**
+     * Admin Domain Forwarding tab
+     *
+     * @param stdClass $package A stdClass object representing the current package
+     * @param stdClass $service A stdClass object representing the current service
+     * @param array $get Any GET parameters
+     * @param array $post Any POST parameters
+     * @param array $files Any FILES parameters
+     * @return string The string representing the contents of this tab
+     */
+    public function tabDomainForwarding($package, $service, array $get = null, array $post = null, array $files = null)
+    {
+        return $this->manageDomainForwarding('tab_domain_forwarding', $package, $service, $get, $post, $files);
+    }
+
+    /**
      * Admin DNSSEC tab
      *
      * @param stdClass $package A stdClass object representing the current package
@@ -2041,6 +2061,21 @@ class Namesilo extends RegistrarModule
     public function tabClientHosts($package, $service, array $get = null, array $post = null, array $files = null)
     {
         return $this->manageHosts('tab_client_hosts', $package, $service, $get, $post, $files);
+    }
+
+    /**
+     * Client Domain Forwarding tab
+     *
+     * @param stdClass $package A stdClass object representing the current package
+     * @param stdClass $service A stdClass object representing the current service
+     * @param array $get Any GET parameters
+     * @param array $post Any POST parameters
+     * @param array $files Any FILES parameters
+     * @return string The string representing the contents of this tab
+     */
+    public function tabClientDomainForwarding($package, $service, array $get = null, array $post = null, array $files = null)
+    {
+        return $this->manageDomainForwarding('tab_client_domain_forwarding', $package, $service, $get, $post, $files);
     }
 
     /**
@@ -2965,6 +3000,77 @@ class Namesilo extends RegistrarModule
         $this->view->set('vars', $vars);
         $this->view->set('client_id', $service->client_id);
         $this->view->set('service_id', $service->id);
+        $this->view->setDefaultView(self::$defaultModuleView);
+
+        return $this->view->fetch();
+    }
+
+    /**
+     * Handle updating Domain Forwarding information
+     *
+     * @param string $view The name of the view to fetch
+     * @param stdClass $package An stdClass object representing the package
+     * @param stdClass $service An stdClass object representing the service
+     * @param array $get Any GET arguments (optional)
+     * @param array $post Any POST arguments (optional)
+     * @param array $files Any FILES data (optional)
+     * @return string The rendered view
+     */
+    private function manageDomainForwarding(
+        $view,
+        $package,
+        $service,
+        array $get = null,
+        array $post = null,
+        array $files = null
+    ) {
+        $checkDomainStatus = $this->checkDomainStatus($service, $package);
+        if (isset($checkDomainStatus)) {
+            return $checkDomainStatus;
+        }
+
+        $row = $this->getModuleRow($service->module_row_id ?? $package->module_row);
+        $api = $this->getApi($row->meta->user, $row->meta->key, $row->meta->sandbox == 'true');
+        $domains = new NamesiloDomains($api);
+
+        $fields = $this->serviceFieldsToObject($service->fields);
+
+        if (!empty($post)) {
+            if (!empty($post['forward_to'])) {
+                if (filter_var($post['forward_to'], FILTER_VALIDATE_URL)) {
+                    $url_parts = parse_url($post['forward_to']);
+                    $domain_forward_response = $domains->domainForward([
+                        'domain'   => $fields->domain,
+                        'protocol' => $url_parts['scheme'] ?? 'https',
+                        'address'  => $url_parts['host'] ?? '',
+                        'method'   => $post['forward_method'],
+                    ]);
+                    $this->processResponse($api, $domain_forward_response);
+                } else {
+                    $this->Input->setErrors(['forward_to' => ['error' => Language::_('Namesilo.tab_domain_forwarding.invalid_url', true)]]);
+                }
+            }
+        }
+
+        $forward_method = [
+            '301'     => Language::_('Namesilo.tab_domain_forwarding.permanent_forward', true),
+            '302'     => Language::_('Namesilo.tab_domain_forwarding.temp_forward', true),
+            'cloaked' => Language::_('Namesilo.tab_domain_forwarding.cloaked', true),
+        ];
+
+        $info_response = $domains->getDomainInfo(['domain' => $fields->domain])->response();
+
+        $this->view = new View($view, 'default');
+        $this->view->base_uri = $this->base_uri;
+        Loader::loadHelpers($this, ['Form', 'Html']);
+
+        $this->view->set('is_domain_forward', $info_response->traffic_type === 'Forwarded');
+        $this->view->set('active_forward_url', $info_response->forward_url);
+        $this->view->set('active_forward_method', array_search($info_response->forward_type, $forward_method, true));
+        $this->view->set('forward_method', $forward_method);
+        $this->view->set('protocol', ['https' => 'https', 'http' => 'http']);
+        $this->view->set('info_response', $info_response);
+        $this->view->set('domain', $fields->domain);
         $this->view->setDefaultView(self::$defaultModuleView);
 
         return $this->view->fetch();
