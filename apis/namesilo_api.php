@@ -27,37 +27,50 @@ class NamesiloApi
     const LIVE_URL = 'https://www.namesilo.com/api';
 
     /**
+     * @var Blesta\Core\ServiceProviders\Logger Container logger
+     */
+    private $logger;
+
+    /**
      * @var string API version
      */
     private $api_version = 1;
+
     /**
      * @var string The format of the API response
      */
     private $format = 'xml';
+
     /**
      * @var string The user to connect as
      */
     private $user;
+
     /**
      * @var string The username to execute an API command using
      */
     private $username;
+
     /**
      * @var string The key to use when connecting
      */
     private $key;
+
     /**
      * @var bool Whether or not to process in sandbox mode (for testing)
      */
     private $sandbox;
+
     /**
      * @var array An array representing the last request made
      */
     private $last_request = ['url' => null, 'args' => null];
+
     /**
      * @var bool use batch api url if true
      */
     private $batch;
+
     /**
      * @var int http return code
      */
