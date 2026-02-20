@@ -16,6 +16,10 @@
         }
         ?>
     </div>
+    <div id="special-char-warning" class="alert alert-warning" style="display:none;">
+        <i class="fas fa-exclamation-triangle"></i>
+        <?php $this->_('Namesilo.tab_edit_contact.special_char_warning'); ?>
+    </div>
     <div class="form-group">
             <?php
             foreach ($fields as $field) {
@@ -85,5 +89,22 @@
         <a class="btn btn-default float-right " href="<?php echo $this->base_uri . 'services/manage/' . (isset($service->id) ? $this->Html->safe($service->id) : null) . '/tabClientManageContacts/';?>"><?php $this->_('Namesilo.tab_edit_contact.field_back'); ?></a>
         <input type="submit" class="btn btn-secondary float-right submit" href="#" value="<?php $this->_('Namesilo.tab_edit_contact.field_submit'); ?>" />
     </div>
+    <script>
+    (function () {
+        var form = $('form:has(input[name="contact_id"])');
+        function check_special_chars() {
+            var has_special = false;
+            form.find('input[type="text"], input:not([type]), textarea').each(function () {
+                if (/[^\x00-\x7F]/.test($(this).val())) {
+                    has_special = true;
+                    return false;
+                }
+            });
+            $('#special-char-warning').toggle(has_special);
+        }
+        form.on('input', 'input[type="text"], input:not([type]), textarea', check_special_chars);
+        check_special_chars();
+    }());
+    </script>
     <?php
     $this->Form->end();
