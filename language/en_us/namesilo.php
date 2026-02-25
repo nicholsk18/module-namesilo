@@ -90,6 +90,7 @@ $lang['Namesilo.tab_add_contact.title'] = 'Add Contact';
 
 $lang['Namesilo.tab_edit_contact.field_back'] = 'Back';
 $lang['Namesilo.tab_edit_contact.field_submit'] = 'Save Contact';
+$lang['Namesilo.tab_edit_contact.special_char_warning'] = 'One or more fields contain special characters (e.g. accented letters). NameSilo may not support these characters in contact fields.';
 
 $lang['Namesilo.tab_email_forwarding.title'] = 'Email Forwarding';
 $lang['Namesilo.tab_email_forwarding.desc'] = 'Email forwarding is automatically directing email sent from one address to a different email address. For example, if you had an existing email address of email@email.com, and then registered the domain newdomain.com, you could use email forward to direct sales@newdomain.com to your existing email@email.com email address.';

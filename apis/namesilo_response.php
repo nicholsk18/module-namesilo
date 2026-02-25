@@ -27,10 +27,31 @@ class NamesiloResponse
         $this->raw = $response;
 
         try {
-            $this->xml = new SimpleXMLElement($this->raw);
+            $this->xml = new SimpleXMLElement($this->sanitizeXml($this->raw));
         } catch (Exception $e) {
             // Invalid response
         }
+    }
+
+    /**
+     * Converts HTML5 named entities in an XML string into numeric character references
+     *
+     * @param string $raw The raw XML string
+     * @return string The sanitized XML string
+     */
+    private function sanitizeXml($raw)
+    {
+        return preg_replace_callback(
+            '/&(?!(?:amp|lt|gt|apos|quot);)([a-zA-Z][a-zA-Z0-9]*);/',
+            function ($matches) {
+                $decoded = html_entity_decode('&' . $matches[1] . ';', ENT_HTML5 | ENT_QUOTES, 'UTF-8');
+                if ($decoded === '&' . $matches[1] . ';') {
+                    return $matches[0];
+                }
+                return '&#' . mb_ord($decoded, 'UTF-8') . ';';
+            },
+            $raw
+        );
     }
 
     /**
