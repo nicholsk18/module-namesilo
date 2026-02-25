@@ -17,10 +17,12 @@
         ?>
     </div>
     <div class="pad">
-        <div id="special-char-warning" class="message_box warning" style="display:none;">
-            <i class="fas fa-exclamation-triangle"></i>
-            <?php $this->_('Namesilo.tab_edit_contact.special_char_warning'); ?>
-        </div>
+        <section class="error_section" id="special-char-warning" style="display:none;">
+            <div class="error_box alert">
+                <i class="fas fa-exclamation-triangle"></i>
+                <?php $this->_('Namesilo.tab_edit_contact.special_char_warning'); ?>
+            </div>
+        </section>
         <ul>
             <?php
             foreach ($fields as $field) {
