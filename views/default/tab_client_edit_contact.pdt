@@ -3,23 +3,23 @@
     $this->Form->create();
     $this->Form->fieldHidden('contact_id', $contact_id ?? null);
     ?>
-
-<?php
-if (isset($contact_id)) {
-?>
-    <h6 class="form-section-header mt-0"><?php $this->_('Namesilo.tab_edit_contact.title');?></h6>
-<?php
-} else {
-?>
-    <h6 class="form-section-header mt-4"><?php $this->_('Namesilo.tab_add_contact.title');?></h6>
-<?php
-}
-?>
-
-<div class="mb-4">
+    <div class="title_row first">
         <?php
-            foreach ($fields ?? [] as $field) {
-                ?>
+        if (isset($contact_id)) {
+        ?>
+            <h3><?php $this->_('Namesilo.tab_edit_contact.title'); ?></h3>
+        <?php
+        } else {
+        ?>
+            <h3><?php $this->_('Namesilo.tab_add_contact.title'); ?></h3>
+        <?php
+        }
+        ?>
+    </div>
+    <div class="form-group">
+            <?php
+            foreach ($fields as $field) {
+            ?>
                 <div class="form-group">
                     <?php
                     // Draw each form field associated with this label
@@ -85,5 +85,22 @@ if (isset($contact_id)) {
         <a class="btn btn-default float-right " href="<?php echo $this->base_uri . 'services/manage/' . (isset($service->id) ? $this->Html->safe($service->id) : null) . '/tabClientManageContacts/';?>"><?php $this->_('Namesilo.tab_edit_contact.field_back'); ?></a>
         <input type="submit" class="btn btn-secondary float-right submit" href="#" value="<?php $this->_('Namesilo.tab_edit_contact.field_submit'); ?>" />
     </div>
+    <script>
+    (function () {
+        var form = $('form:has(input[name="contact_id"])');
+        function check_special_chars() {
+            var has_special = false;
+            form.find('input[type="text"], input:not([type]), textarea').each(function () {
+                if (/[^\x00-\x7F]/.test($(this).val())) {
+                    has_special = true;
+                    return false;
+                }
+            });
+            $('#special-char-warning').toggle(has_special);
+        }
+        form.on('input', 'input[type="text"], input:not([type]), textarea', check_special_chars);
+        check_special_chars();
+    }());
+    </script>
     <?php
     $this->Form->end();
