@@ -3,22 +3,22 @@
     $this->Form->create();
     $this->Form->fieldHidden('contact_id', $contact_id ?? null);
     ?>
-    <div class="title_row first">
+
+<?php
+if (isset($contact_id)) {
+?>
+    <h6 class="form-section-header mt-0"><?php $this->_('Namesilo.tab_edit_contact.title');?></h6>
+<?php
+} else {
+?>
+    <h6 class="form-section-header mt-4"><?php $this->_('Namesilo.tab_add_contact.title');?></h6>
+<?php
+}
+?>
+
+<div class="mb-4">
         <?php
-        if (isset($contact_id)) {
-        ?>
-        <h3><?php $this->_('Namesilo.tab_edit_contact.title'); ?></h3>
-        <?php
-        } else {
-        ?>
-        <h3><?php $this->_('Namesilo.tab_add_contact.title'); ?></h3>
-        <?php
-        }
-        ?>
-    </div>
-    <div class="form-group">
-            <?php
-            foreach ($fields as $field) {
+            foreach ($fields ?? [] as $field) {
                 ?>
                 <div class="form-group">
                     <?php

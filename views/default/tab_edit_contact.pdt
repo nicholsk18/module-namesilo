@@ -4,20 +4,18 @@
     $this->Form->create();
     $this->Form->fieldHidden('contact_id', $contact_id ?? null);
     ?>
-<div class="title_row first">
-    <?php
+<?php
 
         if (isset($contact_id)) {
         ?>
-    <h6 class="form-section-header"><?php $this->_('Namesilo.tab_edit_contact.title');?></h6>
+    <h6 class="form-section-header first"><?php $this->_('Namesilo.tab_edit_contact.title');?></h6>
     <?php
         } else {
         ?>
-    <h6 class="form-section-header"><?php $this->_('Namesilo.tab_add_contact.title');?></h6>
+    <h6 class="form-section-header first"><?php $this->_('Namesilo.tab_add_contact.title');?></h6>
     <?php
         }
         ?>
-</div>
 <div>
     <?php
 
