@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Namesilo Domain Transfer Management
  *
@@ -73,7 +74,8 @@ class NamesiloDomainsTransfer
      *  - Domain name that is being transferred
      * @return NamesiloResponses
      */
-    public function resendAdminEmail(array $vars) {
+    public function resendAdminEmail(array $vars)
+    {
         return $this->api->submit('transferUpdateResendAdminEmail', $vars);
     }
 

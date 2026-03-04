@@ -1,61 +1,71 @@
+<?php /** @var View $this **/ ?>
 
 <?php
     $this->Form->create();
     ?>
 
-    <?php
+<?php
+
     $i = 0;
     foreach ($sections as $key) {
         ?>
-        <div class="title_row">
-            <h3><?php $this->_('Namesilo.tab_whois.section_' . $key); ?></h3>
-        </div>
-        <div class="pad">
-            <ul>
-                <?php
-                $this->Form->fieldSelect($key, $contact_ids, $vars->{$key} ?? null, []);
+<div class="title_row<?php echo ($i === 0 ? ' first' : '');?>">
+    <h6 class="form-section-header"><?php $this->_('Namesilo.tab_whois.section_' . $key);?></h6>
+</div>
+<div>
+    <div class="mb-3">
+    <?php
+
+                $this->Form->label($this->_('Namesilo.tab_whois.field_contact', true), $key, ['class' => 'form-label']);
+                $this->Form->fieldSelect($key, $contact_ids, $vars->{$key} ?? null, ['id' => $key, 'class' => 'form-select']);
                 ?>
-            </ul>
-        </div>
-        <?php
+    </div>
+</div>
+<?php
         $i++;
     }
     ?>
-    <div class="button_row"><a class="btn btn-primary float-right submit" href="#"><?php $this->_('Namesilo.tab_whois.field_submit'); ?></a></div>
+<div class="d-flex justify-content-end">
+    <a class="btn btn-primary submit" href="#"><?php $this->_('Namesilo.tab_whois.field_submit'); ?></a>
+</div>
     <?php
     $this->Form->end();
     ?>
 
-    <script>
-        $(document).ready(function () {
-            $('.match-registrant').click(copyRegistrantInfo);
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.match-registrant').forEach(function(el) {
+            el.addEventListener('click', copyRegistrantInfo);
         });
-        function copyInfo(that) {
-            const line_name = $(that).attr('name').match(/\[(.*)\]/)[1];
-            const main_val = $("input[name='registrant[" + line_name + "]']").val();
+    });
 
-            $(that).val(main_val);
-        }
+    function copyInfo(that) {
+        var name_match = that.getAttribute('name').match(/\[(.*)\]/);
+        if (!name_match) return;
+        const line_name = name_match[1];
+        const main_input = document.querySelector("input[name='registrant[" + line_name + "]']");
+        if (main_input) that.value = main_input.value;
+    }
 
-        function copyRegistrantInfo(e) {
-            e.preventDefault();
-            const value = $(this).attr('name');
-            switch(value) {
-                case 'admin':
-                    $( "input[name^='administrative']:not([type='submit'])" ).each(function() {
-                        copyInfo(this);
-                    });
-                    break;
-                case 'tech':
-                    $( "input[name^='technical']:not([type='submit'])" ).each(function() {
-                        copyInfo(this);
-                    });
-                    break;
-                case 'billing':
-                    $( "input[name^='billing']:not([type='submit'])" ).each(function() {
-                        copyInfo(this);
-                    });
-                    break;
-            }
+    function copyRegistrantInfo(e) {
+        e.preventDefault();
+        const value = this.getAttribute('name');
+        switch (value) {
+            case 'admin':
+                document.querySelectorAll("input[name^='administrative']:not([type='submit'])").forEach(function(el) {
+                    copyInfo(el);
+                });
+                break;
+            case 'tech':
+                document.querySelectorAll("input[name^='technical']:not([type='submit'])").forEach(function(el) {
+                    copyInfo(el);
+                });
+                break;
+            case 'billing':
+                document.querySelectorAll("input[name^='billing']:not([type='submit'])").forEach(function(el) {
+                    copyInfo(el);
+                });
+                break;
         }
-    </script>
+    }
+</script>

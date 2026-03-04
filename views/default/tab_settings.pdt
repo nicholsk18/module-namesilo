@@ -1,83 +1,94 @@
-    <div class="title_row first">
-        <h3><?php $this->_('Namesilo.tab_settings.section_verification'); ?></h3>
-    </div>
-    <?php
+<?php /** @var View $this **/ ?>
+
+<h6 class="form-section-header first"><?php $this->_('Namesilo.tab_settings.section_verification');?></h6>
+<?php
     $this->Form->create();
     ?>
-    <div class="pad">
-        <ul>
-            <li>
-                <?php $this->_('Namesilo.tab_settings.verification_text');
+<div>
+    <div class="mb-3">
+    <?php $this->_('Namesilo.tab_settings.verification_text');
                 echo (isset($vars->registrant_verification_info['email_address']) ? $vars->registrant_verification_info['email_address'] : null); ?>:
-                <?php
+    <?php
+
                 if ((isset($vars->registrant_verification_info['verified']) ? $vars->registrant_verification_info['verified'] : null) == 'Yes') {
                 ?>
-                <span style="color:green"><?php $this->_('Namesilo.tab_settings.verified'); ?></span>!
-            </li>
-            <?php
+            <span style="color:green"><?php $this->_('Namesilo.tab_settings.verified'); ?></span>
+    <?php
             } else {
                 ?>
-                <span style="color:red;font-weight:bold"><?php $this->_('Namesilo.tab_settings.not_verified'); ?></span>!
-                </li>
-                <li><?php $this->_('Namesilo.tab_settings.not_verified_warning'); ?></li>
-                <li>
-                    <?php $this->Form->fieldHidden('resend_verification_email', (isset($vars->registrant_verification_info['email_address']) ? $vars->registrant_verification_info['email_address'] : null)); ?>
-                </li>
-                <li>
-                <div class="button_row">
-                    <a class="btn btn-primary float-right submit" href="#"><?php $this->_('Namesilo.tab_settings.field_resend_verification_email'); ?></a>
-                </div>
-                </li>
-                <?php
-            }
-            ?>
-        </ul>
+            <span style="color:red;font-weight:bold"><?php $this->_('Namesilo.tab_settings.not_verified'); ?></span>
+    <?php
+                }
+                ?>
     </div>
     <?php
+            if ((isset($vars->registrant_verification_info['verified']) ? $vars->registrant_verification_info['verified'] : null) != 'Yes') {
+                ?>
+    <p class="text-muted"><?php $this->_('Namesilo.tab_settings.not_verified_warning'); ?></p>
+    <?php
+                $this->Form->fieldHidden('resend_verification_email', (isset($vars->registrant_verification_info['email_address']) ? $vars->registrant_verification_info['email_address'] : null)); ?>
+    <div class="d-flex justify-content-end">
+        <a class="btn btn-primary submit" href="#"><?php $this->_('Namesilo.tab_settings.field_resend_verification_email'); ?></a>
+    </div>
+    <?php
+            }
+            ?>
+</div>
+<?php
     $this->Form->end();
 
     if ($epp_code ?? false) {
     ?>
-    <div class="title_row">
-        <h3><?php $this->_('Namesilo.tab_settings.title'); ?></h3>
-    </div>
+<h6 class="form-section-header"><?php $this->_('Namesilo.tab_settings.title');?></h6>
 
-    <div class="pad">
-        <ul>
-            <?php
-            $this->Form->create();
-            ?>
-            <li>
-                <?php
-                $this->Form->label($this->_('Namesilo.tab_settings.field_registrar_lock', true), 'registrar_lock');
-
-                $this->Form->fieldRadio('registrar_lock', 'Yes', (isset($vars->registrar_lock) ? $vars->registrar_lock : null) == 'Yes', ['id' => 'registrar_lock_yes']);
-                $this->Form->label($this->_('Namesilo.tab_settings.field_registrar_lock_yes', true), 'registrar_lock_yes', ['class' => 'inline']);
-
-                $this->Form->fieldRadio('registrar_lock', 'No', (isset($vars->registrar_lock) ? $vars->registrar_lock : null) == 'No', ['id' => 'registrar_lock_no']);
-                $this->Form->label($this->_('Namesilo.tab_settings.field_registrar_lock_no', true), 'registrar_lock_no', ['class' => 'inline']);
-                ?>
-                <div class="button_row"><a class="btn btn-primary submit" href="#"><?php $this->_('Namesilo.tab_settings.field_update_registrar_lock'); ?></a></div>
-            </li>
-            <?php
-            $this->Form->end();
-            $this->Form->create();
-            ?>
-            <li class="pt-3">
-                <?php
-                $this->Form->label($this->_('Namesilo.tab_settings.field_epp_code', true), 'field_request_epp');
-
-                $this->Form->fieldCheckbox('request_epp', 'true', (isset($vars->request_epp) ? $vars->request_epp : null) == 'true', ['id' => 'request_epp']);
-                $this->Form->label($this->_('Namesilo.tab_settings.field_request_epp', true), 'request_epp', ['class' => 'inline']);
-                ?>
-
-                <div class="button_row"><a class="btn btn-primary submit" href="#"><?php $this->_('Namesilo.tab_settings.field_resend_epp_code'); ?></a></div>
-            </li>
-            <?php
-            $this->Form->end();
-            ?>
-        </ul>
-    </div>
+<div>
     <?php
+
+            $this->Form->create();
+            ?>
+    <div class="mb-3">
+    <?php
+
+                $this->Form->label($this->_('Namesilo.tab_settings.field_registrar_lock', true), 'registrar_lock', ['class' => 'form-label']);
+                ?>
+        <div class="form-check">
+            <?php
+
+                    $this->Form->fieldRadio('registrar_lock', 'Yes', (isset($vars->registrar_lock) ? $vars->registrar_lock : null) == 'Yes', ['id' => 'registrar_lock_yes', 'class' => 'form-check-input']);
+                    $this->Form->label($this->_('Namesilo.tab_settings.field_registrar_lock_yes', true), 'registrar_lock_yes', ['class' => 'form-check-label']);
+                    ?>
+        </div>
+        <div class="form-check">
+            <?php
+
+                    $this->Form->fieldRadio('registrar_lock', 'No', (isset($vars->registrar_lock) ? $vars->registrar_lock : null) == 'No', ['id' => 'registrar_lock_no', 'class' => 'form-check-input']);
+                    $this->Form->label($this->_('Namesilo.tab_settings.field_registrar_lock_no', true), 'registrar_lock_no', ['class' => 'form-check-label']);
+                    ?>
+        </div>
+    </div>
+    <div class="d-flex justify-content-end">
+        <a class="btn btn-primary submit" href="#"><?php $this->_('Namesilo.tab_settings.field_update_registrar_lock'); ?></a>
+    </div>
+                <?php
+            $this->Form->end();
+            $this->Form->create();
+            ?>
+    <div class="mb-3">
+        <div class="form-check">
+            <?php
+
+                $this->Form->fieldCheckbox('request_epp', 'true', (isset($vars->request_epp) ? $vars->request_epp : null) == 'true', ['id' => 'request_epp', 'class' => 'form-check-input']);
+                $this->Form->label($this->_('Namesilo.tab_settings.field_request_epp', true), 'request_epp', ['class' => 'form-check-label']);
+                ?>
+        </div>
+    </div>
+    <div class="d-flex justify-content-end">
+        <a class="btn btn-primary submit" href="#"><?php $this->_('Namesilo.tab_settings.field_resend_epp_code'); ?></a>
+    </div>
+                <?php
+            $this->Form->end();
+            ?>
+</div>
+                <?php
     }
     ?>

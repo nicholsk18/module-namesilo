@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Namesilo Domain Management
  *
@@ -90,7 +91,7 @@ class NamesiloDomains
     {
         return $this->api->submit('contactAdd', $vars);
     }
-    
+
     /**
      * Updates a contact
      *
@@ -190,11 +191,7 @@ class NamesiloDomains
      */
     public function setAutoRenewal($domain, $autorenew = false)
     {
-        if (!$autorenew) {
-            $action = 'remove';
-        } else {
-            $action = 'add';
-        }
+        $action = !$autorenew ? 'remove' : 'add';
         return $this->api->submit($action . 'AutoRenewal', ['domain' => $domain]);
     }
 

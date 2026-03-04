@@ -1,12 +1,12 @@
 <?php
 
 // DNS Record fields
-Configure::set("Namesilo.dns_records", [
+Configure::set('Namesilo.dns_records', [
     'record_type' => [
         'label' => Language::_('Namesilo.dns_records.record_type', true),
         'type' => 'select',
         'options' => [
-            '' => Language::_("AppController.select.please", true),
+            '' => Language::_('AppController.select.please', true),
             'A' => Language::_('Namesilo.dns_records.record_type.a_record', true),
             'AAAA' => Language::_('Namesilo.dns_records.record_type.aaaa_record', true),
             'CNAME' => Language::_('Namesilo.dns_records.record_type.cname_record', true),

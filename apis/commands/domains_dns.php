@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Namesilo DNS Management
  *
@@ -153,7 +154,8 @@ class NamesiloDomainsDns
      * Update a DNS record
      * https://www.namesilo.com/api_reference.php#dnsUpdateRecord
      */
-    public function dnsUpdateRecord(array $vars) {
+    public function dnsUpdateRecord(array $vars)
+    {
         return $this->api->submit('dnsUpdateRecord', $vars);
     }
 

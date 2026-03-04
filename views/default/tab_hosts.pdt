@@ -1,72 +1,75 @@
-    <div class="title_row first">
-        <h3><?php $this->_('Namesilo.tab_hosts.title'); ?></h3>
-    </div>
-    <div id="domain-hosts">
-        <?php
+<?php /** @var View $this **/ ?>
+
+<h6 class="form-section-header first"><?php $this->_('Namesilo.tab_hosts.title');?></h6>
+<div id="domain-hosts">
+    <?php
+
         $this->Form->create($this->base_uri . 'clients/servicetab/' . (isset($client_id) ? $client_id : null) . '/' . (isset($service_id) ? $service_id : null) . '/tabHosts/');
         ?>
-        <table class="table">
-            <?php
+    <table class="table">
+        <?php
+
             foreach ($vars->hosts as $host) {
                 ?>
-                <!-- Update existing host records -->
-                <thead>
-                <tr class="heading_row">
-                    <td><span><?php echo $this->_('Namesilo.tab_hosts.field_hostname'); ?></span></td>
-                    <td><span><?php $this->_('Namesilo.tab_hosts.field_ip'); ?></span></td>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
+        <!-- Update existing host records -->
+        <thead>
+            <tr>
+                <th><span><?php echo $this->_('Namesilo.tab_hosts.field_hostname'); ?></span></th>
+                <th><span><?php $this->_('Namesilo.tab_hosts.field_ip'); ?></span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+
                 foreach ($host->ip as $index => $ip) {
                     ?>
-                    <tr>
-                        <td><?php echo $index == 0 ? $host->host . '.' . $domain : false; ?></td>
-                        <td><?php $this->Form->fieldText('hosts[' . (isset($host->host) ? $host->host : null) . '][]', $ip); ?></td>
-                    </tr>
+            <tr>
+                <td><?php echo $index == 0 ? $host->host . '.' . $domain : false; ?></td>
+                <td><?php $this->Form->fieldText('hosts[' . (isset($host->host) ? $host->host : null) . '][]', $ip, ['class' => 'form-control']); ?></td>
+            </tr>
                     <?php
                 }
                 if (count($host->ip) < 12) {
                     ?>
-                    <tr>
-                        <td></td>
-                        <td><?php $this->Form->fieldText('hosts[' . (isset($host->host) ? $host->host : null) . '][]'); ?></td>
-                    </tr>
+            <tr>
+                <td></td>
+                <td><?php $this->Form->fieldText('hosts[' . (isset($host->host) ? $host->host : null) . '][]', '', ['class' => 'form-control']); ?></td>
+            </tr>
                     <?php
                 }
                 ?>
-                </tbody>
-                <?php
+        </tbody>
+                    <?php
             }
             ?>
-            <!-- Add New Host Record -->
-            <thead>
-            <tr class="heading_row">
-                <td><span><?php echo $this->_('Namesilo.tab_hosts.field_hostname'); ?></span></td>
-                <td><span><?php $this->_('Namesilo.tab_hosts.field_ip'); ?></span></td>
-            </tr>
-            </thead>
-            <tbody>
+        <!-- Add New Host Record -->
+        <thead>
             <tr>
-                <td><?php $this->Form->fieldText('new_host');
-                    echo '.' . $domain; ?></td>
-                <td><?php $this->Form->fieldText('new_host_ip'); ?></td>
+                <th><span><?php echo $this->_('Namesilo.tab_hosts.field_hostname'); ?></span></th>
+                <th><span><?php $this->_('Namesilo.tab_hosts.field_ip'); ?></span></th>
             </tr>
-            </tbody>
-        </table>
-        <div class="button_row">
-                <?php
+        </thead>
+        <tbody>
+            <tr>
+                <td><?php $this->Form->fieldText('new_host', '', ['class' => 'form-control']);
+                    echo '.' . $domain; ?></td>
+                <td><?php $this->Form->fieldText('new_host_ip', '', ['class' => 'form-control']); ?></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-end">
+        <?php
+
                 $button_attributes = [
-                    'class' => 'btn btn-primary float-right',
+                    'class' => 'btn btn-primary',
                     'value' => 'manageHosts',
                     'type' => 'submit',
                 ];
 
                 $this->Form->fieldButton('action', $this->_('Namesilo.tab_hosts.field_submit', true), $button_attributes);
                 ?>
-            </div>
-        <?php
+    </div>
+                    <?php
         $this->Form->end();
         ?>
-    </div>
-
+</div>

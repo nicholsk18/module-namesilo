@@ -5,6 +5,7 @@ $lang['Namesilo.description'] = 'Resell domains through NameSilo.';
 $lang['Namesilo.module_row'] = 'Account';
 $lang['Namesilo.module_row_plural'] = 'Accounts';
 
+$lang['Namesilo.back_to_manage'] = 'Back';
 
 // Cron tasks
 $lang['Namesilo.getCronTasks.pull_contacts_name'] = 'Pull Namesilo Contacts';

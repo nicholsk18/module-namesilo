@@ -1,33 +1,35 @@
-    <div id="dns-records">
-        <div class="title_row first">
-            <h3><?php $this->_('Namesilo.tab_dnsrecord.title_list');?></h3>
-        </div>
-        <p><?php $this->_('Namesilo.tab_dnsrecord.help_text_1');?></p>
-        <table class="table">
-            <thead>
-                <tr class="heading_row">
-                    <td><span><?php $this->_('Namesilo.dnsrecord.record_type');?></span></td>
-                    <td><span><?php $this->_('Namesilo.dnsrecord.host');?></span></td>
-                    <td><span><?php $this->_('Namesilo.dnsrecord.value');?></span></td>
-                    <td><span><?php $this->_('Namesilo.dnsrecord.distance');?></span></td>
-                    <td><span><?php $this->_('Namesilo.dnsrecord.ttl');?></span></td>
-                    <td><span><?php $this->_('Namesilo.dnsrecord.field_delete');?></span></td>
-                </tr>
-            </thead>
-            <tbody>
+<?php /** @var View $this **/ ?>
+
+<div id="dns-records">
+    <h6 class="form-section-header first"><?php $this->_('Namesilo.tab_dnsrecord.title_list');?></h6>
+    <p class="text-muted"><?php $this->_('Namesilo.tab_dnsrecord.help_text_1');?></p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th><span><?php $this->_('Namesilo.dnsrecord.record_type');?></span></th>
+                <th><span><?php $this->_('Namesilo.dnsrecord.host');?></span></th>
+                <th><span><?php $this->_('Namesilo.dnsrecord.value');?></span></th>
+                <th><span><?php $this->_('Namesilo.dnsrecord.distance');?></span></th>
+                <th><span><?php $this->_('Namesilo.dnsrecord.ttl');?></span></th>
+                <th><span><?php $this->_('Namesilo.dnsrecord.field_delete');?></span></th>
+            </tr>
+        </thead>
+        <tbody>
             <?php
+
             if (count($vars->records) > 0 && isset($vars->records)) {
                 $i = 0;
                 foreach ($vars->records as $record) {
                     ?>
-                    <tr<?php echo ($i % 2 == 1) ? ' class="odd_row"' : ''?>>
-                        <td><?php echo (isset($record['type']) ? $record['type'] : null);?></td>
-                        <td><?php echo (isset($record['host']) ? $record['host'] : null);?></td>
-                        <td><?php echo (isset($record['value']) ? $record['value'] : null);?></td>
-                        <td><?php echo (isset($record['distance']) && $record['distance'] != 0 ? $record['distance'] : null);?></td>
-                        <td><?php echo (isset($record['ttl']) ? $record['ttl'] : null);?></td>
-                        <td>
-                            <?php
+            <tr>
+                <td><?php echo (isset($record['type']) ? $record['type'] : null);?></td>
+                <td><?php echo (isset($record['host']) ? $record['host'] : null);?></td>
+                <td><?php echo (isset($record['value']) ? $record['value'] : null);?></td>
+                <td><?php echo (isset($record['distance']) && $record['distance'] != 0 ? $record['distance'] : null);?></td>
+                <td><?php echo (isset($record['ttl']) ? $record['ttl'] : null);?></td>
+                <td>
+                    <?php
+
                             $this->Form->create(
                                 $this->base_uri . 'clients/servicetab/' . (isset($client_id) ? $client_id : null)
                                     . '/' . (isset($service_id) ? $service_id : null) . '/tabDnsRecords/'
@@ -48,46 +50,45 @@
 
                             $this->Form->end();
                             ?>
-                        </td>
-                    </tr>
+                </td>
+            </tr>
                     <?php
                     $i++;
                 }
             }
             ?>
-            </tbody>
-        </table>
+        </tbody>
+    </table>
 
-        <div class="title_row">
-            <h3><?php $this->_('Namesilo.tab_dnsrecord.title_add');?></h3>
-        </div>
-        <?php
+    <h6 class="form-section-header"><?php $this->_('Namesilo.tab_dnsrecord.title_add');?></h6>
+                    <?php
         $this->Form->create(
             $this->base_uri . 'clients/servicetab/' . (isset($client_id) ? $client_id : null)
                 . '/' . (isset($service_id) ? $service_id : null) . '/tabDnsRecords/'
         );
         ?>
-        <table class="table">
-            <!-- Add New DNS Record -->
-            <thead>
-                <tr class="heading_row">
-                    <td><span><?php $this->_('Namesilo.dnsrecord.record_type');?></span></td>
-                    <td><span><?php $this->_('Namesilo.dnsrecord.host');?></span></td>
-                    <td><span><?php $this->_('Namesilo.dnsrecord.value');?></span></td>
-                    <td class="distance" style="display:none;"><span><?php $this->_('Namesilo.dnsrecord.distance');?></span></td>
-                    <td><span><?php $this->_('Namesilo.dnsrecord.ttl');?></span></td>
-                    <td></td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><?php $this->Form->fieldSelect('record_type', $vars->selects['record_type']['options']);?></td>
-                    <td><?php $this->Form->fieldText('host');?></td>
-                    <td><?php $this->Form->fieldText('value');?></td>
-                    <td class="distance" style="display:none;"><?php $this->Form->fieldText('distance', 10);?></td>
-                    <td><?php $this->Form->fieldText('ttl', 7207);?></td>
-                    <td>
-                        <?php
+    <table class="table">
+        <!-- Add New DNS Record -->
+        <thead>
+            <tr>
+                <th><span><?php $this->_('Namesilo.dnsrecord.record_type');?></span></th>
+                <th><span><?php $this->_('Namesilo.dnsrecord.host');?></span></th>
+                <th><span><?php $this->_('Namesilo.dnsrecord.value');?></span></th>
+                <th class="distance" style="display:none;"><span><?php $this->_('Namesilo.dnsrecord.distance');?></span></th>
+                <th><span><?php $this->_('Namesilo.dnsrecord.ttl');?></span></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><?php $this->Form->fieldSelect('record_type', $vars->selects['record_type']['options'], '', ['class' => 'form-select']);?></td>
+                <td><?php $this->Form->fieldText('host', '', ['class' => 'form-control']);?></td>
+                <td><?php $this->Form->fieldText('value', '', ['class' => 'form-control']);?></td>
+                <td class="distance" style="display:none;"><?php $this->Form->fieldText('distance', 10, ['class' => 'form-control']);?></td>
+                <td><?php $this->Form->fieldText('ttl', 7207, ['class' => 'form-control']);?></td>
+                <td>
+                    <?php
+
                         $button_attributes = [
                             'class' => 'btn btn-primary',
                             'value' => 'addDnsRecord',
@@ -100,24 +101,25 @@
                             $button_attributes
                         );
                         ?>
-                    </td>
+                </td>
 
-                </tr>
-            </tbody>
-        </table>
-        <?php
+            </tr>
+        </tbody>
+    </table>
+                    <?php
         $this->Form->end();
         ?>
-    </div>
+</div>
 
-    <script>
-        $(document).ready(function() {
-            $('[name="record_type"]').on('change', function() {
-                if($(this).val() == 'MX') {
-                    $('.distance').show()
-                } else {
-                    $('.distance').hide()
-                }
-            })
-        })
-    </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('[name="record_type"]').forEach(function(el) {
+            el.addEventListener('change', function() {
+                var display = this.value === 'MX' ? '' : 'none';
+                document.querySelectorAll('.distance').forEach(function(d) {
+                    d.style.display = display;
+                });
+            });
+        });
+    });
+</script>
