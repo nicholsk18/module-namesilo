@@ -1,28 +1,24 @@
 <?php /** @var View $this **/ ?>
 
-<?php
-    $this->Form->create();
-    ?>
-<h6 class="form-section-header first"><?php $this->_('Namesilo.tab_nameservers.title');?></h6>
+<?php $this->Form->create(); ?>
+<h6 class="form-section-header first"><?php $this->_('Namesilo.tab_nameservers.title'); ?></h6>
 <div>
-    <?php
-
-            for ($i = 0; $i < 5; $i++) {
-                ?>
+    <?php for ($i = 0; $i < 5; $i++) { ?>
     <div class="mb-3">
     <?php
-
-                    $this->Form->label($this->_('Namesilo.tab_nameservers.field_ns', true, $i + 1), 'ns' . ($i + 1), ['class' => 'form-label']);
-                    $this->Form->fieldText('ns[]', (isset($vars->ns[$i]) ? $vars->ns[$i] : null), ['id' => 'ns' . ($i + 1), 'class' => 'form-control']);
-                    ?>
+    $this->Form->label($this->_('Namesilo.tab_nameservers.field_ns', true, $i + 1), 'ns' . ($i + 1), [
+        'class' => 'form-label',
+    ]);
+    $this->Form->fieldText('ns[]', isset($vars->ns[$i]) ? $vars->ns[$i] : null, [
+        'id' => 'ns' . ($i + 1),
+        'class' => 'form-control',
+    ]);
+    ?>
     </div>
-    <?php
-            }
-            ?>
+    <?php } ?>
 </div>
 <div class="d-flex justify-content-end">
     <a class="btn btn-primary submit" href="#"><?php $this->_('Namesilo.tab_nameservers.field_submit'); ?></a>
 </div>
-    <?php
-    $this->Form->end();
-    ?>
+    <?php $this->Form->end();
+?>

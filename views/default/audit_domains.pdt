@@ -1,12 +1,12 @@
 <?php /** @var View $this **/ ?>
 
 <?php
-        $this->Widget->clear();
-        $this->Widget->create($this->_('Namesilo.add_row.audit_domains.box_title', true));
-        ?>
+$this->Widget->clear();
+$this->Widget->create($this->_('Namesilo.add_row.audit_domains.box_title', true));
+?>
 <div class="inner">
     <p><?php echo $this->_('Namesilo.manage.audit_domains.description', true); ?></p>
-    <h6 class="form-section-header first"><?php $this->_('Namesilo.manage.audit_domains.results');?></h6>
+    <h6 class="form-section-header first"><?php $this->_('Namesilo.manage.audit_domains.results'); ?></h6>
     <?php if (count($vars->domains ?? []) > 0) { ?>
     <table class="table">
         <thead>
@@ -16,23 +16,17 @@
             </tr>
         </thead>
         <tbody>
-            <?php
-
-                        foreach ($vars->domains as $domain) {
-                            ?>
+            <?php foreach ($vars->domains as $domain) { ?>
             <tr>
-                <td><?php echo (isset($domain) ? $domain : null); ?></td>
+                <td><?php echo isset($domain) ? $domain : null; ?></td>
                 <td>No corresponding billing record in Blesta.</td>
             </tr>
-                    <?php
-                        }
-                        ?>
+                    <?php } ?>
         </tbody>
     </table>
     <?php } else { ?>
     <p><?php echo $this->_('Namesilo.manage.audit_domains.no_issues', true); ?></p>
     <?php } ?>
 </div>
-                    <?php
-        $this->Widget->end();
-        ?>
+                    <?php $this->Widget->end();
+?>

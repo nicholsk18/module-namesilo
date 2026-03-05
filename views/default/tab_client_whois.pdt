@@ -1,30 +1,21 @@
 
-<?php
-    $this->Form->create();
-    ?>
+<?php $this->Form->create(); ?>
 
     <?php
     $i = 0;
-    foreach ($sections as $key) {
-        ?>
+    foreach ($sections as $key) { ?>
         <div class="title_row">
             <h4><?php $this->_('Namesilo.tab_whois.section_' . $key); ?></h4>
         </div>
         <div class="form-group">
-        <?php
-        $this->Form->fieldSelect($key, $contact_ids, $vars->{$key} ?? null, ['class' => 'form-control']);
-        ?>
+        <?php $this->Form->fieldSelect($key, $contact_ids, $vars->{$key} ?? null, ['class' => 'form-control']); ?>
         </div>
-        <?php
-        $i++;
-    }
+        <?php $i++;}
     ?>
     <button class="btn btn-light float-right" type="submit">
         <i class="fas fa-edit"></i> <?php $this->_('Namesilo.tab_whois.field_submit'); ?>
     </button>
-    <?php
-    $this->Form->end();
-    ?>
+    <?php $this->Form->end(); ?>
 
     <script>
         $(document).ready(function () {

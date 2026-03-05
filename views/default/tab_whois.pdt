@@ -1,34 +1,27 @@
 <?php /** @var View $this **/ ?>
 
-<?php
-    $this->Form->create();
-    ?>
+<?php $this->Form->create(); ?>
 
 <?php
-
-    $i = 0;
-    foreach ($sections as $key) {
-        ?>
-<h6 class="form-section-header<?php echo ($i === 0 ? ' first' : '');?>>"><?php $this->_('Namesilo.tab_whois.section_' . $key);?></h6>
+$i = 0;
+foreach ($sections as $key) { ?>
+<h6 class="form-section-header<?php echo $i === 0 ? ' first' : ''; ?>>"><?php $this->_(
+    'Namesilo.tab_whois.section_' . $key,
+); ?></h6>
 <div>
     <div class="mb-3">
     <?php
-
-                $this->Form->label($this->_('Namesilo.tab_whois.field_contact', true), $key, ['class' => 'form-label']);
-                $this->Form->fieldSelect($key, $contact_ids, $vars->{$key} ?? null, ['id' => $key, 'class' => 'form-select']);
-                ?>
+    $this->Form->label($this->_('Namesilo.tab_whois.field_contact', true), $key, ['class' => 'form-label']);
+    $this->Form->fieldSelect($key, $contact_ids, $vars->{$key} ?? null, ['id' => $key, 'class' => 'form-select']);
+    ?>
     </div>
 </div>
-<?php
-        $i++;
-    }
-    ?>
+<?php $i++;}
+?>
 <div class="d-flex justify-content-end">
     <a class="btn btn-primary submit" href="#"><?php $this->_('Namesilo.tab_whois.field_submit'); ?></a>
 </div>
-    <?php
-    $this->Form->end();
-    ?>
+    <?php $this->Form->end(); ?>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
