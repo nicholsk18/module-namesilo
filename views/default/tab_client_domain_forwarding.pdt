@@ -1,0 +1,36 @@
+    <div class="row panel-fix">
+        <div class="col-md-12">
+            <?php
+            $this->Form->create();
+            ?>
+                <h4><?php $this->_('Namesilo.tab_domain_forwarding.title'); ?></h4>
+                <p class="mb-2"><?php $this->_('Namesilo.tab_domain_forwarding.desc'); ?></p>
+
+                <div class="table-responsive my-2">
+                    <table class="table table-curved table-striped">
+                        <thead>
+                            <tr>
+                                <th><?php $this->_('Namesilo.tab_domain_forwarding.field_domain'); ?></th>
+                                <th><?php $this->_('Namesilo.tab_domain_forwarding.field_forward_to'); ?></th>
+                                <th><?php $this->_('Namesilo.tab_domain_forwarding.field_http_type'); ?></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td><?php echo $domain; ?></td>
+                                <td><?php $this->Form->fieldText('forward_to', $active_forward_url); ?></td>
+                                <td><?php $this->Form->fieldSelect('forward_method', $forward_method, $active_forward_method); ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <button class="btn btn-light float-right" type="submit">
+                    <i class="fas fa-edit"></i> <?php $this->_('Namesilo.tab_domain_forwarding.field_submit'); ?>
+                </button>
+            <?php
+            $this->Form->end();
+            ?>
+        </div>
+    </div>

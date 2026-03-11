@@ -112,6 +112,19 @@ $lang['Namesilo.tab_hosts.field_hostname'] = 'Host';
 $lang['Namesilo.tab_hosts.field_submit'] = 'Update All Hosts';
 $lang['Namesilo.tab_client_hosts.help_text'] = 'On this page you can add your own custom name servers (sometimes referred to as "glue records") to associate with your domains.  To remove a host record blank all IP fields associated with it before clicking update.  You can not delete any host records which have domains actively using it as a nameserver.';
 
+$lang['Namesilo.tab_domain_forwarding.title'] = 'Domain Forwarding';
+$lang['Namesilo.tab_domain_forwarding.desc'] = 'Domain forwarding gets removed automatically when you give the domain something else to do such as changing name servers, or changing the primary A records for @ and www. <br/> To have any of these changes reflect on your domain name you must set name servers to:<br />NS1.DNSOWL.COM<br />NS2.DNSOWL.COM<br />NS3.DNSOWL.COM';
+$lang['Namesilo.tab_domain_forwarding.field_domain'] = 'Domain';
+$lang['Namesilo.tab_domain_forwarding.field_forward_to'] = 'Forward To';
+$lang['Namesilo.tab_domain_forwarding.field_http_type'] = 'Forwarding Method';
+$lang['Namesilo.tab_domain_forwarding.permanent_forward'] = 'Permanent Forward (301)';
+$lang['Namesilo.tab_domain_forwarding.temp_forward'] = 'Temporary Forward (302)';
+$lang['Namesilo.tab_domain_forwarding.cloaked'] = 'Cloaked';
+$lang['Namesilo.tab_domain_forwarding.field_active'] = 'Active';
+$lang['Namesilo.tab_domain_forwarding.field_delete'] = 'Delete';
+$lang['Namesilo.tab_domain_forwarding.field_submit'] = 'Update Forwarders';
+$lang['Namesilo.tab_domain_forwarding.invalid_url'] = 'Forwarding URL is invalid. Please make sure to use HTTPS or HTTP.';
+
 $lang['Namesilo.tab_dnssec.title'] = 'DNSSEC';
 $lang['Namesilo.tab_dnssec.title_list'] = 'Current DS (DNSSEC) Records';
 $lang['Namesilo.tab_dnssec.title_add'] = 'Add DS (DNSSEC) Record';
@@ -133,7 +146,7 @@ $lang['Namesilo.tab_dnsrecord.title_list'] = 'Current DNS Records';
 $lang['Namesilo.tab_dnsrecord.title_add'] = 'Add a DNS Record';
 $lang['Namesilo.tab_dnsrecord.field_delete'] = 'Delete Record(s)';
 $lang['Namesilo.tab_dnsrecord.field_add'] = 'Add Record';
-$lang['Namesilo.tab_dnsrecord.help_text_1'] = 'On this page you can add or delete A, AAAA, CNAME, MX and TXT DNS records. Please be ware that it might take some few minutes for DNS records to propagate.';
+$lang['Namesilo.tab_dnsrecord.help_text_1'] = 'On this page you can add or delete A, AAAA, CNAME, MX and TXT DNS records. Please be ware that it might take some few minutes for DNS records to propagate. <br/> To have any of these changes reflect on your domain name you must set name servers to:<br />NS1.DNSOWL.COM<br />NS2.DNSOWL.COM<br />NS3.DNSOWL.COM';
 
 $lang['Namesilo.dnsrecord.record_type'] = 'Type';
 $lang['Namesilo.dnsrecord.host'] = 'Host';
