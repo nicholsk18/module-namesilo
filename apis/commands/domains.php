@@ -261,4 +261,40 @@ class NamesiloDomains
     {
         return $this->api->submit('emailVerification', $vars);
     }
+
+    /**
+     * Add/update domain forwarding
+     * 
+     * @param array $vars An array of data
+     * 
+     * @return NamesiloResponse
+     */
+    public function domainForward(array $vars)
+    {
+        return $this->api->submit('domainForward', $vars);
+    }
+
+    /**
+     * Add/update domain forwarding
+     * 
+     * @param array $vars An array of data
+     * 
+     * @return NamesiloResponse
+     */
+    public function domainForwardSubDomain(array $vars)
+    {
+        return $this->api->submit('domainForwardSubDomain', $vars);
+    }
+
+    /**
+     * Add/update domain forwarding
+     * 
+     * @param array $vars An array of data
+     * 
+     * @return NamesiloResponse
+     */
+    public function domainForwardSubDomainDelete(array $vars)
+    {
+        return $this->api->submit('domainForwardSubDomainDelete', $vars);
+    }
 }

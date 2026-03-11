@@ -122,7 +122,7 @@ $lang['Namesilo.tab_domain_forwarding.cloaked'] = 'Cloaked';
 $lang['Namesilo.tab_domain_forwarding.field_active'] = 'Active';
 $lang['Namesilo.tab_domain_forwarding.field_delete'] = 'Delete';
 $lang['Namesilo.tab_domain_forwarding.field_submit'] = 'Update Forwarders';
-$lang['Namesilo.tab_domain_forwarding.invalid_url'] = 'Forwarding URL is invlide. Please make sure to use HTTPS or HTTP.';
+$lang['Namesilo.tab_domain_forwarding.invalid_url'] = 'Forwarding URL is invalid. Please make sure to use HTTPS or HTTP.';
 
 $lang['Namesilo.tab_dnssec.title'] = 'DNSSEC';
 $lang['Namesilo.tab_dnssec.title_list'] = 'Current DS (DNSSEC) Records';
