@@ -3455,7 +3455,7 @@ class Namesilo extends RegistrarModule
         );
 
         if ($cache) {
-            return unserialize(base64_decode($cache));
+            return safe_unserialize(base64_decode($cache));
         }
 
         // Fetch namesilo TLDs
@@ -3492,7 +3492,7 @@ class Namesilo extends RegistrarModule
                 try {
                     Cache::writeCache(
                         'tlds',
-                        base64_encode(serialize($tlds)),
+                        base64_encode(safe_serialize($tlds)),
                         strtotime(Configure::get('Blesta.cache_length')) - time(),
                         Configure::get('Blesta.company_id') . DS . 'modules' . DS . 'namesilo' . DS
                     );
@@ -3938,7 +3938,7 @@ class Namesilo extends RegistrarModule
         );
 
         if ($cache) {
-            $result = unserialize(base64_decode($cache));
+            $result = safe_unserialize(base64_decode($cache));
         }
 
         Loader::loadModels($this, ['Currencies']);
@@ -3960,7 +3960,7 @@ class Namesilo extends RegistrarModule
                 try {
                     Cache::writeCache(
                         'tlds_prices',
-                        base64_encode(serialize($result)),
+                        base64_encode(safe_serialize($result)),
                         strtotime(Configure::get('Blesta.cache_length')) - time(),
                         Configure::get('Blesta.company_id') . DS . 'modules' . DS . 'namesilo' . DS
                     );
