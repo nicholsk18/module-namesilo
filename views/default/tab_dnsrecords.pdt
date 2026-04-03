@@ -19,27 +19,27 @@
                 $i = 0;
                 foreach ($vars->records as $record) { ?>
             <tr>
-                <td><?php echo isset($record['type']) ? $record['type'] : null; ?></td>
-                <td><?php echo isset($record['host']) ? $record['host'] : null; ?></td>
-                <td><?php echo isset($record['value']) ? $record['value'] : null; ?></td>
+                <td><?php echo $record['type'] ?? null; ?></td>
+                <td><?php echo $record['host'] ?? null; ?></td>
+                <td><?php echo $record['value'] ?? null; ?></td>
                 <td><?php echo isset($record['distance']) && $record['distance'] != 0
                     ? $record['distance']
                     : null; ?></td>
-                <td><?php echo isset($record['ttl']) ? $record['ttl'] : null; ?></td>
+                <td><?php echo $record['ttl'] ?? null; ?></td>
                 <td>
                     <?php
                     $this->Form->create(
                         $this->base_uri .
                             'clients/servicetab/' .
-                            (isset($client_id) ? $client_id : null) .
+                            ($client_id ?? null) .
                             '/' .
-                            (isset($service_id) ? $service_id : null) .
+                            ($service_id ?? null) .
                             '/tabDnsRecords/',
                     );
-                    $this->Form->fieldHidden('record_id', isset($record['record_id']) ? $record['record_id'] : null);
+                    $this->Form->fieldHidden('record_id', $record['record_id'] ?? null);
 
                     $button_attributes = [
-                        'class' => 'btn btn-sm',
+                        'class' => 'btn btn-sm btn-outline-danger',
                         'value' => 'deleteDnsRecord',
                         'type' => 'submit',
                     ];
@@ -54,7 +54,8 @@
                     ?>
                 </td>
             </tr>
-                    <?php $i++;}
+                    <?php $i++;
+                }
             } ?>
         </tbody>
     </table>
@@ -63,9 +64,9 @@
                     <?php $this->Form->create(
                         $this->base_uri .
                             'clients/servicetab/' .
-                            (isset($client_id) ? $client_id : null) .
+                            ($client_id ?? null) .
                             '/' .
-                            (isset($service_id) ? $service_id : null) .
+                            ($service_id ?? null) .
                             '/tabDnsRecords/',
                     ); ?>
     <table class="table">

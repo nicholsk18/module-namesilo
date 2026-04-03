@@ -2,10 +2,8 @@
 
 <div id="ds-records">
     <h6 class="form-section-header first"><?php $this->_('Namesilo.tab_dnssec.title_disclaimer'); ?></h6>
-    <div class="pad">
-        <p class="text-warning"><?php $this->_('Namesilo.tab_dnssec.warning_message1'); ?></p>
-        <p class="text-warning"><?php $this->_('Namesilo.tab_dnssec.warning_message2'); ?></p>
-    </div>
+    <p class="text-warning"><?php $this->_('Namesilo.tab_dnssec.warning_message1'); ?></p>
+    <p class="text-warning"><?php $this->_('Namesilo.tab_dnssec.warning_message2'); ?></p>
 
     <h6 class="form-section-header"><?php $this->_('Namesilo.tab_dnssec.title_list'); ?></h6>
     <table class="table">
@@ -23,28 +21,28 @@
         <!-- List existing ds records -->
         <tbody>
             <tr>
-                <td><?php echo isset($record->key_tag) ? $record->key_tag : null; ?></td>
-                <td><?php echo isset($record->algorithm) ? $record->algorithm : null; ?></td>
-                <td><?php echo isset($record->digest_type) ? $record->digest_type : null; ?></td>
-                <td><?php echo isset($record->digest) ? $record->digest : null; ?></td>
+                <td><?php echo $record->key_tag ?? null; ?></td>
+                <td><?php echo $record->algorithm ?? null; ?></td>
+                <td><?php echo $record->digest_type ?? null; ?></td>
+                <td><?php echo $record->digest ?? null; ?></td>
                 <td>
                     <?php
                     $this->Form->create(
                         $this->base_uri .
                             'clients/servicetab/' .
-                            (isset($client_id) ? $client_id : null) .
+                            ($client_id ?? null) .
                             '/' .
-                            (isset($service_id) ? $service_id : null) .
+                            ($service_id ?? null) .
                             '/tabDnssec/',
                     );
 
-                    $this->Form->fieldHidden('digest', isset($record->digest) ? $record->digest : null);
-                    $this->Form->fieldHidden('key_tag', isset($record->key_tag) ? $record->key_tag : null);
-                    $this->Form->fieldHidden('algorithm', isset($record->algorithm) ? $record->algorithm : null);
-                    $this->Form->fieldHidden('digest_type', isset($record->digest_type) ? $record->digest_type : null);
+                    $this->Form->fieldHidden('digest', $record->digest ?? null);
+                    $this->Form->fieldHidden('key_tag', $record->key_tag ?? null);
+                    $this->Form->fieldHidden('algorithm', $record->algorithm ?? null);
+                    $this->Form->fieldHidden('digest_type', $record->digest_type ?? null);
 
                     $button_attributes = [
-                        'class' => 'btn',
+                        'class' => 'btn btn-sm btn-outline-danger',
                         'value' => 'deleteDnssec',
                         'type' => 'submit',
                     ];
@@ -60,7 +58,7 @@
                 </td>
             </tr>
         </tbody>
-                    <?php }
+            <?php }
         } ?>
     </table>
 
@@ -68,9 +66,9 @@
                     <?php $this->Form->create(
                         $this->base_uri .
                             'clients/servicetab/' .
-                            (isset($client_id) ? $client_id : null) .
+                            ($client_id ?? null) .
                             '/' .
-                            (isset($service_id) ? $service_id : null) .
+                            ($service_id ?? null) .
                             '/tabDnssec/',
                     ); ?>
     <table class="table">

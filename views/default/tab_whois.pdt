@@ -5,7 +5,7 @@
 <?php
 $i = 0;
 foreach ($sections as $key) { ?>
-<h6 class="form-section-header<?php echo $i === 0 ? ' first' : ''; ?>>"><?php $this->_(
+<h6 class="form-section-header<?php echo $i === 0 ? ' first' : ''; ?>"><?php $this->_(
     'Namesilo.tab_whois.section_' . $key,
 ); ?></h6>
 <div>
