@@ -19,6 +19,17 @@ $this->Form->fieldHidden('contact_id', $contact_id ?? null);
     <?php foreach ($fields as $field) { ?>
     <div class="mb-3">
         <?php
+        // Add form-label class to the primary label
+        if ($field->type == 'label') {
+            if (!isset($field->params['attributes'])) {
+                $field->params['attributes'] = ['class' => 'form-label'];
+            } elseif (isset($field->params['attributes']['class'])) {
+                $field->params['attributes']['class'] .= ' form-label';
+            } else {
+                $field->params['attributes']['class'] = 'form-label';
+            }
+        }
+
         // Draw the primary label/field
         call_user_func_array([$this->Form, $field->type], $field->params);
 
@@ -31,21 +42,42 @@ $this->Form->fieldHidden('contact_id', $contact_id ?? null);
                 continue;
             }
 
+            $is_check_or_radio = ($input->type == 'fieldCheckbox' || $input->type == 'fieldRadio');
+
+            if ($is_check_or_radio) {
+                echo '<div class="form-check">';
+                if (isset($input->params['attributes']['class'])) {
+                    $input->params['attributes']['class'] .= ' form-check-input';
+                } else {
+                    $input->params['attributes']['class'] = 'form-check-input';
+                }
+            } else {
+                if (in_array($input->type, ['fieldText', 'fieldPassword', 'fieldTextarea', 'fieldSelect'])) {
+                    $class = $input->type == 'fieldSelect' ? 'form-select' : 'form-control';
+                    if (isset($input->params['attributes']['class'])) {
+                        $input->params['attributes']['class'] .= ' ' . $class;
+                    } else {
+                        $input->params['attributes']['class'] = $class;
+                    }
+                }
+            }
+
             call_user_func_array([$this->Form, $input->type], $input->params);
 
             // Draw the form field's secondary label if checkbox or radio item
-            if (($input->type == 'fieldCheckbox' || $input->type == 'fieldRadio') && isset($input->label)) {
+            if ($is_check_or_radio && isset($input->label)) {
                 if (isset($input->label->params['attributes']['class'])) {
                     if (is_array($input->label->params['attributes']['class'])) {
-                        $input->label->params['attributes']['class'][] = 'inline';
+                        $input->label->params['attributes']['class'][] = 'form-check-label';
                     } else {
-                        $input->label->params['attributes']['class'] .= ' inline';
+                        $input->label->params['attributes']['class'] .= ' form-check-label';
                     }
                 } else {
-                    $input->label->params['attributes']['class'] = 'inline';
+                    $input->label->params['attributes']['class'] = 'form-check-label';
                 }
 
                 call_user_func_array([$this->Form, 'label'], $input->label->params);
+                echo '</div>';
             }
         }
 
