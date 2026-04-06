@@ -21,7 +21,7 @@ class Communication extends Namesilo
 
     public function send(array $post)
     {
-        $notice = isset($post['notice']) ? $post['notice'] : '';
+        $notice = $post['notice'] ?? '';
         if (empty($notice) || !array_key_exists($notice, $this->getNotices())) {
             return false;
         }

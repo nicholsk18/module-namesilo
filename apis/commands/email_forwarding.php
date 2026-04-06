@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Namesilo Email Forwarding Management
  *

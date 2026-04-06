@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Namesilo API response handler
  *
@@ -28,7 +29,7 @@ class NamesiloResponse
 
         try {
             $this->xml = new SimpleXMLElement($this->sanitizeXml($this->raw));
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             // Invalid response
         }
     }

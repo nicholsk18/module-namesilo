@@ -5,6 +5,7 @@ $lang['Namesilo.description'] = 'Resell domains through NameSilo.';
 $lang['Namesilo.module_row'] = 'Account';
 $lang['Namesilo.module_row_plural'] = 'Accounts';
 
+$lang['Namesilo.back_to_manage'] = 'Back';
 
 // Cron tasks
 $lang['Namesilo.getCronTasks.pull_contacts_name'] = 'Pull Namesilo Contacts';
@@ -76,7 +77,7 @@ $lang['Namesilo.tab_whois.copy_registrant_info'] = 'Copy Registrant Info';
 $lang['Namesilo.tab_manage_contacts.title'] = 'Manage Contacts';
 $lang['Namesilo.tab_manage_contacts.heading_contact_id'] = 'Contact ID';
 $lang['Namesilo.tab_manage_contacts.heading_name'] = 'Contact Name';
-$lang['Namesilo.tab_manage_contacts.heading_options'] = 'Options';
+$lang['Namesilo.tab_manage_contacts.heading_actions'] = 'Actions';
 $lang['Namesilo.tab_manage_contacts.option_add'] = 'Add Contact';
 $lang['Namesilo.tab_manage_contacts.option_edit'] = 'Edit';
 $lang['Namesilo.tab_manage_contacts.option_delete'] = 'Delete';
