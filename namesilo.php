@@ -3466,7 +3466,7 @@ class Namesilo extends RegistrarModule
         );
 
         if ($cache) {
-            return unserialize(base64_decode($cache));
+            return safe_unserialize(base64_decode($cache));
         }
 
         // Fetch namesilo TLDs
@@ -3949,7 +3949,7 @@ class Namesilo extends RegistrarModule
         );
 
         if ($cache) {
-            $result = unserialize(base64_decode($cache));
+            $result = safe_unserialize(base64_decode($cache));
         }
 
         Loader::loadModels($this, ['Currencies']);
