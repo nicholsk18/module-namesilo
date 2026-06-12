@@ -271,6 +271,39 @@ $lang['Namesilo.domain.CIRALanguage'] = 'Language';
 $lang['Namesilo.domain.CIRALanguage.en'] = 'English';
 $lang['Namesilo.domain.CIRALanguage.fr'] = 'French';
 
+// .EU domain fields
+$lang['Namesilo.domain.EUCountryOfCitizenship'] = 'Country of Citizenship';
+$lang['Namesilo.domain.EUCountryOfCitizenship.at'] = 'Austria';
+$lang['Namesilo.domain.EUCountryOfCitizenship.be'] = 'Belgium';
+$lang['Namesilo.domain.EUCountryOfCitizenship.bg'] = 'Bulgaria';
+$lang['Namesilo.domain.EUCountryOfCitizenship.hr'] = 'Croatia';
+$lang['Namesilo.domain.EUCountryOfCitizenship.cy'] = 'Cyprus';
+$lang['Namesilo.domain.EUCountryOfCitizenship.cz'] = 'Czech Republic';
+$lang['Namesilo.domain.EUCountryOfCitizenship.dk'] = 'Denmark';
+$lang['Namesilo.domain.EUCountryOfCitizenship.ee'] = 'Estonia';
+$lang['Namesilo.domain.EUCountryOfCitizenship.fi'] = 'Finland';
+$lang['Namesilo.domain.EUCountryOfCitizenship.fr'] = 'France';
+$lang['Namesilo.domain.EUCountryOfCitizenship.de'] = 'Germany';
+$lang['Namesilo.domain.EUCountryOfCitizenship.gr'] = 'Greece';
+$lang['Namesilo.domain.EUCountryOfCitizenship.hu'] = 'Hungary';
+$lang['Namesilo.domain.EUCountryOfCitizenship.is'] = 'Iceland';
+$lang['Namesilo.domain.EUCountryOfCitizenship.ie'] = 'Ireland';
+$lang['Namesilo.domain.EUCountryOfCitizenship.it'] = 'Italy';
+$lang['Namesilo.domain.EUCountryOfCitizenship.lv'] = 'Latvia';
+$lang['Namesilo.domain.EUCountryOfCitizenship.li'] = 'Liechtenstein';
+$lang['Namesilo.domain.EUCountryOfCitizenship.lt'] = 'Lithuania';
+$lang['Namesilo.domain.EUCountryOfCitizenship.lu'] = 'Luxembourg';
+$lang['Namesilo.domain.EUCountryOfCitizenship.mt'] = 'Malta';
+$lang['Namesilo.domain.EUCountryOfCitizenship.nl'] = 'Netherlands';
+$lang['Namesilo.domain.EUCountryOfCitizenship.no'] = 'Norway';
+$lang['Namesilo.domain.EUCountryOfCitizenship.pl'] = 'Poland';
+$lang['Namesilo.domain.EUCountryOfCitizenship.pt'] = 'Portugal';
+$lang['Namesilo.domain.EUCountryOfCitizenship.ro'] = 'Romania';
+$lang['Namesilo.domain.EUCountryOfCitizenship.sk'] = 'Slovakia';
+$lang['Namesilo.domain.EUCountryOfCitizenship.si'] = 'Slovenia';
+$lang['Namesilo.domain.EUCountryOfCitizenship.es'] = 'Spain';
+$lang['Namesilo.domain.EUCountryOfCitizenship.se'] = 'Sweden';
+
 // Success messages
 $lang['Namesilo.!success.packages_saved'] = 'The packages have been successfully saved.';
 $lang['Namesilo.!success.epp_code_sent'] = "The EPP Code/Transfer Key has been sent to the administrative contact for this domain name via email.";
@@ -299,6 +332,8 @@ $lang['Namesilo.!error.CA.CIRALegalType.invalid'] = 'Invalid legal type submitte
 $lang['Namesilo.!error.CA.CIRAWhoisDisplay.invalid'] = 'Invalid whois display option submitted.';
 $lang['Namesilo.!error.CA.CIRALanaguage.invalid'] = 'Invalid language submitted.';
 $lang['Namesilo.!error.CA.CIRALegalType.other'] = 'Only individual legal types may be processed automatically.  Please contact us for more information.';
+$lang['Namesilo.!error.EU.EUCountryOfCitizenship.empty'] = 'Please select a country of citizenship.';
+$lang['Namesilo.!error.EU.EUCountryOfCitizenship.invalid'] = 'Invalid country of citizenship submitted.';
 
 // Tooltips
 $lang['Namesilo.!tooltip.upgrades_use_renewal'] = 'When enabled, upgrading to this package will use renewal prices if they are set. The regular price will be used if this setting is disabled.';
