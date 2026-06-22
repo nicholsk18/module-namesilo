@@ -556,6 +556,29 @@ class Namesilo extends RegistrarModule
             $rules = array_merge($rules, $rule);
         }
 
+        // .eu fields
+        if (isset($vars['eucs'])) {
+            $rule = [
+                'eucs' => [
+                    'empty' => [
+                        'rule' => ['isEmpty'],
+                        'negate' => true,
+                        'message' => Language::_('Namesilo.!error.EU.EUCountryOfCitizenship.empty', true),
+                        'post_format' => 'trim',
+                        'final' => true
+                    ],
+                    'valid' => [
+                        'rule' => [
+                            'array_key_exists',
+                            Configure::get('Namesilo.domain_fields.eu')['eucs']['options']
+                        ],
+                        'message' => Language::_('Namesilo.!error.EU.EUCountryOfCitizenship.invalid', true)
+                    ]
+                ],
+            ];
+            $rules = array_merge($rules, $rule);
+        }
+
         if (isset($rules) && count($rules) > 0) {
             $this->Input->setRules($rules);
 
