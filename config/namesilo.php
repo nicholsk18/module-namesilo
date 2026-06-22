@@ -258,6 +258,47 @@ Configure::set('Namesilo.domain_fields.ca', [
     ]
 ]);
 
+// .EU
+Configure::set('Namesilo.domain_fields.eu', [
+    'eucs' => [
+        'label' => Language::_('Namesilo.domain.EUCountryOfCitizenship', true),
+        'type' => 'select',
+        'options' => [
+            '' => Language::_('AppController.select.please', true),
+            'AT' => Language::_('Namesilo.domain.EUCountryOfCitizenship.at', true),
+            'BE' => Language::_('Namesilo.domain.EUCountryOfCitizenship.be', true),
+            'BG' => Language::_('Namesilo.domain.EUCountryOfCitizenship.bg', true),
+            'HR' => Language::_('Namesilo.domain.EUCountryOfCitizenship.hr', true),
+            'CY' => Language::_('Namesilo.domain.EUCountryOfCitizenship.cy', true),
+            'CZ' => Language::_('Namesilo.domain.EUCountryOfCitizenship.cz', true),
+            'DK' => Language::_('Namesilo.domain.EUCountryOfCitizenship.dk', true),
+            'EE' => Language::_('Namesilo.domain.EUCountryOfCitizenship.ee', true),
+            'FI' => Language::_('Namesilo.domain.EUCountryOfCitizenship.fi', true),
+            'FR' => Language::_('Namesilo.domain.EUCountryOfCitizenship.fr', true),
+            'DE' => Language::_('Namesilo.domain.EUCountryOfCitizenship.de', true),
+            'GR' => Language::_('Namesilo.domain.EUCountryOfCitizenship.gr', true),
+            'HU' => Language::_('Namesilo.domain.EUCountryOfCitizenship.hu', true),
+            'IS' => Language::_('Namesilo.domain.EUCountryOfCitizenship.is', true),
+            'IE' => Language::_('Namesilo.domain.EUCountryOfCitizenship.ie', true),
+            'IT' => Language::_('Namesilo.domain.EUCountryOfCitizenship.it', true),
+            'LV' => Language::_('Namesilo.domain.EUCountryOfCitizenship.lv', true),
+            'LI' => Language::_('Namesilo.domain.EUCountryOfCitizenship.li', true),
+            'LT' => Language::_('Namesilo.domain.EUCountryOfCitizenship.lt', true),
+            'LU' => Language::_('Namesilo.domain.EUCountryOfCitizenship.lu', true),
+            'MT' => Language::_('Namesilo.domain.EUCountryOfCitizenship.mt', true),
+            'NL' => Language::_('Namesilo.domain.EUCountryOfCitizenship.nl', true),
+            'NO' => Language::_('Namesilo.domain.EUCountryOfCitizenship.no', true),
+            'PL' => Language::_('Namesilo.domain.EUCountryOfCitizenship.pl', true),
+            'PT' => Language::_('Namesilo.domain.EUCountryOfCitizenship.pt', true),
+            'RO' => Language::_('Namesilo.domain.EUCountryOfCitizenship.ro', true),
+            'SK' => Language::_('Namesilo.domain.EUCountryOfCitizenship.sk', true),
+            'SI' => Language::_('Namesilo.domain.EUCountryOfCitizenship.si', true),
+            'ES' => Language::_('Namesilo.domain.EUCountryOfCitizenship.es', true),
+            'SE' => Language::_('Namesilo.domain.EUCountryOfCitizenship.se', true),
+        ]
+    ]
+]);
+
 // Email templates
 Configure::set('Namesilo.email_templates', [
     'en_us' => [
