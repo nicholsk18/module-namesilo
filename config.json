@@ -48,5 +48,8 @@
         "id_protection": 1,
         "epp_code": 1
     },
-    "icon": "bi-globe"
+    "logo": {
+        "light": "views/default/images/logo.png",
+        "dark": "views/default/images/logo-dark.png"
+    }
 }
