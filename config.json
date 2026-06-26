@@ -1,5 +1,5 @@
 {
-    "version": "4.0.0",
+    "version": "4.0.1",
     "type": "registrar",
     "name": "Namesilo.name",
     "description": "Namesilo.description",
@@ -48,5 +48,8 @@
         "id_protection": 1,
         "epp_code": 1
     },
-    "icon": "bi-globe"
+    "logo": {
+        "light": "views/default/images/logo.png",
+        "dark": "views/default/images/logo-dark.png"
+    }
 }
